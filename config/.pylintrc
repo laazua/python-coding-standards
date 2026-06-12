@@ -1,0 +1,116 @@
+[MASTER]
+# Pylint configuration for Python coding standards enforcement
+ignore=migrations,.venv,venv,.tox,.git,__pycache__,build,dist,*.egg-info
+ignore-patterns=^\.#.*$
+persistent=yes
+load-plugins=
+extension-pkg-allow-list=
+suggestion-mode=yes
+fail-under=8.0
+
+[MESSAGES CONTROL]
+# Disabled messages:
+# C0114: missing-module-docstring (handled by separate docstring checker)
+# C0115: missing-class-docstring (handled by separate docstring checker)
+# R0903: too-few-public-methods (dataclasses often have few methods)
+# R0801: duplicate-code (too noisy for small projects)
+disable=
+    C0114,
+    C0115,
+    R0903,
+    R0801,
+
+enable=
+    useless-suppression,
+    use-symbolic-message-instead,
+    deprecated-pragma,
+
+[REPORTS]
+output-format=colorized
+reports=no
+score=yes
+msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}
+
+[BASIC]
+# Naming conventions
+good-names=i,j,k,ex,_,__
+
+# Function names
+function-naming-style=snake_case
+function-rgx=[a-z_][a-z0-9_]{2,40}$
+
+# Method names
+method-naming-style=snake_case
+method-rgx=[a-z_][a-z0-9_]{2,40}$
+
+# Class names
+class-naming-style=PascalCase
+class-rgx=[A-Z_][a-zA-Z0-9]+$
+
+# Constant names
+const-naming-style=UPPER_CASE
+const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
+
+# Variable names
+variable-naming-style=snake_case
+variable-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Attribute names
+attr-naming-style=snake_case
+attr-rgx=[a-z_][a-z0-9_]{1,40}$
+
+# Argument names
+argument-naming-style=snake_case
+argument-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Module names
+module-naming-style=snake_case
+module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
+
+# No argument name should shadow a builtin
+no-docstring-rgx=^_
+docstring-min-length=-1
+
+[FORMAT]
+indent-string='    '
+max-line-length=79
+max-module-lines=1000
+single-line-if-stmt=no
+single-line-class-stmt=no
+expected-line-ending-format=LF
+
+[LOGGING]
+logging-format-style=new
+logging-modules=logging
+
+[TYPECHECK]
+# Type checking settings
+ignored-classes=optparse.Values,thread._local,_thread._local
+generated-members=objects,setUp,tearDown
+contextmanager-decorators=contextlib.contextmanager
+
+[DESIGN]
+# Design constraints
+max-args=5
+max-locals=15
+max-returns=6
+max-branches=12
+max-statements=50
+max-parents=7
+max-attributes=7
+min-public-methods=0
+max-public-methods=20
+
+[IMPORTS]
+# Import rules
+allow-wildcard-with-all=no
+allow-any-import-level=
+analyse-fallback-blocks=no
+
+[CLASSES]
+# Class rules
+valid-classmethod-first-arg=cls
+valid-metaclass-first-arg=cls
+
+[EXCEPTIONS]
+overgeneral-exceptions=builtins.Exception

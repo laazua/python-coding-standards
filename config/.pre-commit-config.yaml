@@ -1,0 +1,72 @@
+# Pre-commit hook configuration for Python Coding Standards
+# Install with: pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+      - id: detect-private-key
+      - id: debug-statements
+      - id: requirements-txt-fixer
+
+  # Black - The uncompromising code formatter
+  - repo: https://github.com/psf/black
+    rev: 24.2.0
+    hooks:
+      - id: black
+        language_version: python3
+        args: ['--line-length=79', '--target-version=py39']
+        exclude: ^migrations/
+
+  # isort - Import sorting
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: ['--profile=black', '--line-length=79']
+        exclude: ^migrations/
+
+  # mypy - Static type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        args: ['--strict', '--config-file=config/mypy.ini']
+        additional_dependencies: []
+        exclude: ^tests/|^migrations/
+
+  # pylint - Code analysis
+  - repo: https://github.com/PyCQA/pylint
+    rev: v3.0.3
+    hooks:
+      - id: pylint
+        args: ['--rcfile=config/.pylintrc']
+        exclude: ^tests/|^migrations/
+
+  # flake8 - PEP8 checking
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        args: ['--max-line-length=79', '--extend-ignore=E203,W503']
+        exclude: ^migrations/
+
+  # pyupgrade - Automatically upgrade syntax for newer Python versions
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.15.0
+    hooks:
+      - id: pyupgrade
+        args: ['--py39-plus']
+        exclude: ^migrations/
