@@ -1,18 +1,10 @@
 ---
 name: python-coding-standards
 description: Enforces PEP8 coding standards and strict type constraints for Python development. Automatically activates during Python coding sessions.
-version: 1.0.0
-author: Python Standards Team
-triggers:
+disable-model-invocation: false
+paths:
   - "*.py"
-  - "python:*"
-auto_activate: true
-priority: high
-dependencies:
-  - black>=23.0.0
-  - mypy>=1.0.0
-  - pylint>=3.0.0
-  - isort>=5.12.0
+  - "**/*.py"
 ---
 
 # Python Coding Standards Enforcer
